@@ -1,0 +1,51 @@
+\documentclass[a4j,12pt,uplatex,dvipdfmx]{jsreport}
+\usepackage{physics2}
+\usepackage{amsmath}
+\usepackage{bm}
+
+% セクション番号の表記を砂川理論電磁気に揃える
+\renewcommand{\thesection}{\S \arabic{section}}
+
+\title{砂川理論電磁気学　学習ノート}
+\author{orange-kyoto}
+\date{\today}
+\begin{document}
+\maketitle
+
+\tableofcontents
+\clearpage
+
+
+\chapter{真空電磁場の基本法則}
+
+\section{場の概念}
+
+\section{電場と磁場の定義}
+
+\section{Coulomb の法則}
+
+閉曲面$S$の外部に点電荷が存在するときは、以下が"容易に"示せるとのこと：
+
+\begin{eqnarray*}
+    \oint_{S} \bm{E}(\bm{x}) \cdot \bm{n}(\bm{x}) dS = 0
+\end{eqnarray*}
+
+閉曲面内に点電荷がないので、電場が無限大になるような特異点が無い。よって、電場のdivを普通に計算することができる。
+
+\begin{eqnarray*}
+    \frac{\partial}{\partial x} E_{x} 
+    &=& \frac{\partial}{\partial x} \frac{e}{4 \pi \epsilon_0} \frac{x - x_{Q}}{R^3} \\
+    &=& \frac{e}{4 \pi \epsilon_0} \left\{ \frac{1}{R^3} - \frac{3 ( x - x_{Q} )^2}{R^5} \right\} 
+\end{eqnarray*}
+
+同じように y, z の偏微分も計算できるので
+
+\begin{eqnarray*}
+    \nabla \cdot \bm{E}(\bm{x}) &=& \frac{e}{4 \pi \epsilon_0} \left\{ \frac{3}{R^3} - \frac{3 ( x - x_{Q} )^2 + 3 ( y - y_{Q} )^2 + 3 ( z - z_{Q} )^2}{R^5} \right\} \\
+    &=& \frac{e}{4 \pi \epsilon_0} \left\{ \frac{3}{R^3} - \frac{3 R^2}{R^5} \right\} \\
+    &=& \frac{e}{4 \pi \epsilon_0} \left\{ \frac{3}{R^3} - \frac{3}{R^3} \right\} \\
+    &=& 0
+\end{eqnarray*}
+
+になり、積分しても$0$になる。電場の湧き出しが無いので、閉曲面を出入りする電場が差し引きでゼロになるイメージ。
+\end{document}
