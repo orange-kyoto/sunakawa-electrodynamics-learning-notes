@@ -1,0 +1,24 @@
+name: tex-fmt
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Rust toolchain（cargo が必要なので入れる）
+      - uses: dtolnay/rust-toolchain@stable
+
+      # Install tex-fmt via cargo-binstall Action
+      - uses: cargo-bins/cargo-binstall@main
+        with:
+          crate: tex-fmt
+          locked: true       # Cargo.lock を使った解決を強制（速い＆安定）
+
+      # Run make fmt-check
+      - name: Run format check
+        run: make fmt-check
