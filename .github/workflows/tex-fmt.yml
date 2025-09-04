@@ -12,7 +12,10 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
 
-      - uses: taiki-e/install-action@tex-fmt
+      - uses: cargo-bins/cargo-binstall@main
 
+      - name: Install tex-fmt
+        run: cargo binstall tex-fmt --no-confirm --locked
+        
       - name: Run format check
         run: make fmt-check
