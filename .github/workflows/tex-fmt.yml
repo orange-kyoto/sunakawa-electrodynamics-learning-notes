@@ -12,18 +12,10 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
 
-      - uses: cargo-bins/cargo-binstall@main
-        with:
-          crate: tex-fmt
-          # version: "0.4.0"   # 固定したい場合は指定、最新でOKなら省略
-          locked: true
-      # - uses: taiki-e/install-action@v2
-      #   with:
-      #     tool: tex-fmt
-      # - uses: cargo-bins/cargo-binstall@main
+      - uses: Swatinem/rust-cache@v2
 
-      # - name: Install tex-fmt
-      #   run: cargo binstall tex-fmt --no-confirm --lockedV
+      - name: Install tex-fmt
+        run: cargo install tex-fmt --locked --force
 
       - name: Run format check
         run: make fmt-check
