@@ -12,9 +12,14 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
 
-      - uses: taiki-e/install-action@v2
+      - uses: cargo-bins/cargo-binstall@main
         with:
-          tool: tex-fmt
+          crate: tex-fmt
+          # version: "0.4.0"   # 固定したい場合は指定、最新でOKなら省略
+          locked: true
+      # - uses: taiki-e/install-action@v2
+      #   with:
+      #     tool: tex-fmt
       # - uses: cargo-bins/cargo-binstall@main
 
       # - name: Install tex-fmt
