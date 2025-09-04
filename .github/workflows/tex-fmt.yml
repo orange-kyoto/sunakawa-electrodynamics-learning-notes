@@ -13,9 +13,11 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
 
       - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: ""
 
       - name: Install tex-fmt
-        run: cargo install tex-fmt --locked --force
+        run: cargo install tex-fmt --force
 
       - name: Run format check
         run: make fmt-check
