@@ -6,6 +6,17 @@
 % セクション番号の表記を砂川理論電磁気に揃える
 \renewcommand{\thesection}{\S \arabic{section}}
 
+% 勾配
+\DeclareMathOperator{\grad}{\nabla}
+% 発散
+% \divが「÷」と競合するため再定義
+\DeclareMathOperator{\divergence}{\nabla\cdot}
+\let\divisionsymbol\div
+\renewcommand{\div}{\divergence}
+% 回転
+\DeclareMathOperator{\rot}{\nabla\times}
+\DeclareMathOperator{\rotp}{\nabla ' \times}
+
 \title{砂川理論電磁気学　学習ノート}
 \author{orange-kyoto}
 \date{\today}
@@ -15,6 +26,9 @@
 \tableofcontents
 \clearpage
 
+% --------------------------------
+% 第1章
+% --------------------------------
 \chapter{真空電磁場の基本法則}
 
 \section{場の概念}
@@ -25,32 +39,33 @@
 
 閉曲面$S$の外部に点電荷が存在するときは、以下が"容易に"示せるとのこと：
 
-\begin{eqnarray*}
+\begin{align*}
   \oint_{S} \bm{E}(\bm{x}) \cdot \bm{n}(\bm{x}) dS = 0
-\end{eqnarray*}
+\end{align*}
 
 ガウスの定理より、
 
-\begin{eqnarray*}
+\begin{align*}
   \oint_{S} \bm{E}(\bm{x}) \cdot \bm{n}(\bm{x}) dS = \int_{V} \nabla \cdot \bm{E}(\bm{x}) d^3 x
-\end{eqnarray*}
+\end{align*}
 
 閉曲面内に点電荷がないので、電場が無限大になるような特異点が無い。よって、電場のdivを普通に計算することができる。
 
-\begin{eqnarray*}
+\begin{align*}
   \frac{\partial}{\partial x} E_{x}
-  &=& \frac{\partial}{\partial x} \frac{e}{4 \pi \epsilon_0} \frac{x - x_{Q}}{R^3} \\
-  &=& \frac{e}{4 \pi \epsilon_0} \left\{ \frac{1}{R^3} - \frac{3 ( x - x_{Q} )^2}{R^5} \right\}
-\end{eqnarray*}
+  &= \frac{\partial}{\partial x} \frac{e}{4 \pi \epsilon_0} \frac{x - x_{Q}}{R^3} \\
+  &= \frac{e}{4 \pi \epsilon_0} \left\{ \frac{1}{R^3} - \frac{3 ( x - x_{Q} )^2}{R^5} \right\}
+\end{align*}
 
 同じように y, z の偏微分も計算できるので
 
-\begin{eqnarray*}
-  \nabla \cdot \bm{E}(\bm{x}) &=& \frac{e}{4 \pi \epsilon_0} \left\{ \frac{3}{R^3} - \frac{3 ( x - x_{Q} )^2 + 3 ( y - y_{Q} )^2 + 3 ( z - z_{Q} )^2}{R^5} \right\} \\
-  &=& \frac{e}{4 \pi \epsilon_0} \left\{ \frac{3}{R^3} - \frac{3 R^2}{R^5} \right\} \\
-  &=& \frac{e}{4 \pi \epsilon_0} \left\{ \frac{3}{R^3} - \frac{3}{R^3} \right\} \\
-  &=& 0
-\end{eqnarray*}
+\begin{align*}
+  \nabla \cdot \bm{E}(\bm{x})
+  &= \frac{e}{4 \pi \epsilon_0} \left\{ \frac{3}{R^3} - \frac{3 ( x - x_{Q} )^2 + 3 ( y - y_{Q} )^2 + 3 ( z - z_{Q} )^2}{R^5} \right\} \\
+  &= \frac{e}{4 \pi \epsilon_0} \left\{ \frac{3}{R^3} - \frac{3 R^2}{R^5} \right\} \\
+  &= \frac{e}{4 \pi \epsilon_0} \left\{ \frac{3}{R^3} - \frac{3}{R^3} \right\} \\
+  &= 0
+\end{align*}
 
 になり、積分しても$0$になる。電場の湧き出しが無いので、閉曲面を出入りする電場が差し引きでゼロになるイメージ。
 \section{Faraday の電磁誘導の法則}
@@ -63,10 +78,11 @@
 
 帯電体 $\rho_0$ 自身が作る静電場から受ける力を自己力と呼ぶらしい。次の形でかける\footnote{そういえばこの形だと一見、$\bm{x}$と$\bm{x'}$が近いような領域で分母が発散しそうに思う。そう思った。けど、電荷分布が有限である限りは発散しない。点電荷だと電荷分布が$\rho (x) = q \delta(\bm{x} - \bm{x}_0)$などと書けるので積分が発散してしまうけどね。これはまた別で勉強してまとめてみたい。}：
 
-\begin{eqnarray*}
-  \bm{F}^{(e)}_{s} &=& \int_{V} \rho_0(\bm{x}) \bm{E}_0(\bm{x}) d^3 x \\
-  &=& \frac{1}{4 \pi \epsilon_0} \int_V d^3 x \int_V d^3 x' \frac{\rho_0(\bm{x}) (\bm{x} - \bm{x'}) \rho_0(\bm{x'})}{| \bm{x} - \bm{x'} |^3}
-\end{eqnarray*}
+\begin{align*}
+  \bm{F}^{(e)}_{s}
+  &= \int_{V} \rho_0(\bm{x}) \bm{E}_0(\bm{x}) d^3 x \\
+  &= \frac{1}{4 \pi \epsilon_0} \int_V d^3 x \int_V d^3 x' \frac{\rho_0(\bm{x}) (\bm{x} - \bm{x'}) \rho_0(\bm{x'})}{| \bm{x} - \bm{x'} |^3}
+\end{align*}
 
 2行目への変形では、帯電体の位置$\bm{x'}$の微小領域の電荷$\rho_0(\bm{x'}) d^3 x'$が位置$\bm{x}$に作る静電場がクーロンの法則からわかっているので、それを重ね合わせた電場の式を使っている。
 これが$0$になるとのことだが、以下のように考えると当然のようにも思えてくる。
@@ -75,17 +91,91 @@
 
 位置$\bm{x}$の電荷が受ける力は、
 
-\begin{eqnarray*}
+\begin{align*}
   \bm{F}_1 = \frac{1}{4 \pi \epsilon_0}  \frac{\rho_0(\bm{x})d^3 x (\bm{x} - \bm{x'}) \rho_0(\bm{x'}) d^3 x'}{| \bm{x} - \bm{x'} |^3}
-\end{eqnarray*}
+\end{align*}
 
 と書けるし、逆に位置$\bm{x'}$の電荷が受ける力は、
 
-\begin{eqnarray*}
+\begin{align*}
   \bm{F}_2 = \frac{1}{4 \pi \epsilon_0}  \frac{\rho_0(\bm{x'}) d^3 x' (\bm{x'} - \bm{x}) \rho_0(\bm{x}) d^3 x}{| \bm{x'} - \bm{x} |^3} = - \bm{F}_1
-\end{eqnarray*}
+\end{align*}
 
 と書ける。よって2点の合力は$\bm{F} = \bm{F}_1 + \bm{F}_2 = 0$になる。
 最初の自己力の式は領域$V$のすべての点のペア\footnote{$\bm{x}$,$\bm{x'}$どちらも$V$全体で足し合わせているので、厳密には1つのペアについて2回足し算しているとは思う。が、結局$0$になるのでここでは問題にはならない。自己力をきちんと考慮する必要がある場面ではどう扱うのだろう？それともクーロン力で考えること自体が誤っているのだろうか。}について足し合わせているだけと考えると、合力$0$をいくら足し合わせても全体が$0$なので、自己力が$0$になるのは当然のように思われる。
+
+% --------------------------------
+% 第2章
+% --------------------------------
+\chapter{真空電磁場の基本法則}
+
+\section{点電荷と電磁場の共存する体系}
+
+\section{座標変換と時間反転}
+
+空間回転に対するベクトルの変換規則と、Maxwell 方程式が空間回転に対して共変、つまり方程式が形を変えないことを説明している。
+座標およびベクトルの変換規則は、直行行列を作用させるような変換で、ベクトルの長さや内積を変えないものであることは知っている。線形代数の初歩的なところ（ちょっと復習したが）。
+
+教科書(2.6)式で、電場の rot がベクトルとして変換されることを使っている。つまり、
+
+\begin{align*}
+  \left( \rotp \bm{E'}(\bm{x'}, t) \right)_i = \sum_{i=1}^{3} a_{ij} \left( \rot \bm{E} (\bm{x}, t) \right)_j
+\end{align*}
+
+が成り立つことを使っている。定義した空間回転に対するベクトルの変換規則から、上のことが言えるのか？を念のため確認する。\footnote{まあ外積もベクトルだし、そうだよなとは思いつつ...}
+
+まず $\nabla$の変換規則について考える。空間回転の逆変換を考えると、
+
+\begin{align*}
+  x_i = \sum_{j=1}^{3} a_{ji} x'_j
+\end{align*}
+
+が成り立つ。直行行列の逆行列は転置をとったものと考えれば明らか。したがって、
+
+\begin{align*}
+  \frac{\partial}{\partial x'_i}
+  &= \sum_{j=1}^{3} \frac{\partial x_j}{\partial x'_i} \frac{\partial}{\partial x_j} \\
+  &= \sum_{j=1}^{3} a_{ij} \frac{\partial}{\partial x_j}
+\end{align*}
+
+となるので、$\nabla$はベクトルとしての変換規則を満たすことがわかる。
+
+外積の返還については少しだけ直行行列の性質ついて準備をする。空間回転を表す$3 \times 3$正方行列を$A = (a_{ij})_{i,j=1,2,3}$とする。直行行列は$R R^{t} = I$ ($I$は単に行列)を満たすので、行列式は $(\det R)^2 = 1$、つまり $\det R = \pm 1$を満たす。
+ここでは空間反転を入れない純粋な回転を考えたいので、$\det R = 1$としてよい。\footnote{$SO(3)$の元だけを考えるということになるのか。この辺よく知らんけど。}
+
+行列式の定義より、
+
+\begin{align*}
+  \det R = \sum_{lmn} \epsilon_{lmn} R_{l1}  R_{m2}  R_{n3} = 1
+\end{align*}
+
+とかける。行列式は行の入れ替えについて反対称なので、
+
+\begin{align}
+  \epsilon_{ijk} = \sum_{lmn} \epsilon_{lmn} R_{li}  R_{mj}  R_{nk}
+\end{align}
+
+となる。上式の両辺に$R_{pk}$をかけて$k$について和をとると、直行行列なので$\sum_{k} R_{nk} R_{pk} = \delta_{np}$となることに注意すると、
+
+\begin{align}
+  \epsilon_{ijk} R_{nk} = \epsilon_{lmn} R_{li} R_{mj} \label{eq:rot-matrix-eq}
+\end{align}
+
+が成り立つ。なお、$p$をあらためて$n$と書き直した。
+
+\eqref{eq:rot-matrix-eq}式を使うと、外積がベクトルとして変換することが以下のように示せる。$\bm{a},\bm{b}$をベクトルとして、Einsteinの縮約規則を使うことにすると、
+
+\begin{align*}
+  \left( \left( R \bm{a} \right) \times \left( R \bm{b} \right) \right)_i
+  &= \epsilon_{ijk} \left( R \bm{a} \right)_j \left( R \bm{b} \right)_k \\
+  &= \epsilon_{ijk} R_{jl} a_l R_{km} b_m \\
+  &= a_l b_m \epsilon_{ijk} R_{jl} R_{km} \\
+  &= a_l b_m \epsilon_{lmk} R_{ik} \\
+  &= R_{ik} \epsilon_{klm} a_l b_m \\
+  &= R_{ik} \left( \bm{a} \times \bm{b} \right)_k  \\
+  &= \left( R \left( \bm{a} \times \bm{b} \right)  \right)_i
+\end{align*}
+
+となるので、外積がベクトルとしての変換規則を満たすことが確認できた。よってMaxwell方程式のベクトルの形の式も、空間回転に対して共変であることが簡単にわかる。\footnote{なんか小難しい計算をしてしまった気がする。もう少し簡単に理解できるものではないのだろうか。とはいえ、ベクトル解析のこうした計算の復習にもなるのでやって良かったとは思っている。}
 
 \end{document}
